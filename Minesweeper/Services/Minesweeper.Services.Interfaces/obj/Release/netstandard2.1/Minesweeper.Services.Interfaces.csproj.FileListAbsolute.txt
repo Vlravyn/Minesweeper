@@ -1,0 +1,9 @@
+C:\Users\Gurpreet Singh\source\repos\Minesweeper\Minesweeper\Services\Minesweeper.Services.Interfaces\bin\Release\netstandard2.1\Minesweeper.Services.Interfaces.deps.json
+C:\Users\Gurpreet Singh\source\repos\Minesweeper\Minesweeper\Services\Minesweeper.Services.Interfaces\bin\Release\netstandard2.1\Minesweeper.Services.Interfaces.dll
+C:\Users\Gurpreet Singh\source\repos\Minesweeper\Minesweeper\Services\Minesweeper.Services.Interfaces\bin\Release\netstandard2.1\Minesweeper.Services.Interfaces.pdb
+C:\Users\Gurpreet Singh\source\repos\Minesweeper\Minesweeper\Services\Minesweeper.Services.Interfaces\obj\Release\netstandard2.1\Minesweeper.Services.Interfaces.csprojAssemblyReference.cache
+C:\Users\Gurpreet Singh\source\repos\Minesweeper\Minesweeper\Services\Minesweeper.Services.Interfaces\obj\Release\netstandard2.1\Minesweeper.Services.Interfaces.AssemblyInfoInputs.cache
+C:\Users\Gurpreet Singh\source\repos\Minesweeper\Minesweeper\Services\Minesweeper.Services.Interfaces\obj\Release\netstandard2.1\Minesweeper.Services.Interfaces.AssemblyInfo.cs
+C:\Users\Gurpreet Singh\source\repos\Minesweeper\Minesweeper\Services\Minesweeper.Services.Interfaces\obj\Release\netstandard2.1\Minesweeper.Services.Interfaces.csproj.CoreCompileInputs.cache
+C:\Users\Gurpreet Singh\source\repos\Minesweeper\Minesweeper\Services\Minesweeper.Services.Interfaces\obj\Release\netstandard2.1\Minesweeper.Services.Interfaces.dll
+C:\Users\Gurpreet Singh\source\repos\Minesweeper\Minesweeper\Services\Minesweeper.Services.Interfaces\obj\Release\netstandard2.1\Minesweeper.Services.Interfaces.pdb

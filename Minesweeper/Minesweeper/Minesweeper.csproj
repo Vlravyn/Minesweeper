@@ -1,0 +1,46 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <AssemblyName>Minesweeper</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Resources\Images\flag.png" />
+    <None Remove="Resources\Images\mine.png" />
+    <None Remove="Resources\Images\questionMark.png" />
+    <None Remove="Resources\Images\timer.png" />
+    <None Remove="Resources\Sounds\GameStart.wma" />
+    <None Remove="Resources\Sounds\Lose.wma" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.19" />
+    <PackageReference Include="Prism.Ninject" Version="7.2.0.1422" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Minesweeper.Core\Minesweeper.Core.csproj" />
+    <ProjectReference Include="..\Modules\Minesweeper.Modules.ModuleName\Minesweeper.Modules.ModuleName.csproj" />
+    <ProjectReference Include="..\Services\Minesweeper.Services.Interfaces\Minesweeper.Services.Interfaces.csproj" />
+    <ProjectReference Include="..\Services\Minesweeper.Services\Minesweeper.Services.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\flag.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\mine.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\questionMark.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\timer.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sounds\GameStart.wma">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sounds\Lose.wma">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,20 @@
+﻿Minesweeper
+1.0.0.0
+
+winexe
+C#
+.cs
+C:\Users\Gurpreet Singh\source\repos\Minesweeper\Minesweeper\Minesweeper\obj\Debug\netcoreapp3.1\
+Minesweeper
+none
+false
+TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
+C:\Users\Gurpreet Singh\source\repos\Minesweeper\Minesweeper\Minesweeper\App.xaml
+4-147729698
+
+111197393106
+2031311387971
+Views\Game.xaml;Views\GameEnd.xaml;Views\Settings.xaml;Views\Statistics.xaml;
+
+True
+

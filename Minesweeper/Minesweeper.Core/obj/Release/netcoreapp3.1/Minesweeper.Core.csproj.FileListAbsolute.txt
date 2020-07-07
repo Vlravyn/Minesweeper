@@ -1,0 +1,9 @@
+C:\Users\Gurpreet Singh\source\repos\Minesweeper\Minesweeper\Minesweeper.Core\bin\Release\netcoreapp3.1\Minesweeper.Core.deps.json
+C:\Users\Gurpreet Singh\source\repos\Minesweeper\Minesweeper\Minesweeper.Core\bin\Release\netcoreapp3.1\Minesweeper.Core.dll
+C:\Users\Gurpreet Singh\source\repos\Minesweeper\Minesweeper\Minesweeper.Core\bin\Release\netcoreapp3.1\Minesweeper.Core.pdb
+C:\Users\Gurpreet Singh\source\repos\Minesweeper\Minesweeper\Minesweeper.Core\obj\Release\netcoreapp3.1\Minesweeper.Core.csprojAssemblyReference.cache
+C:\Users\Gurpreet Singh\source\repos\Minesweeper\Minesweeper\Minesweeper.Core\obj\Release\netcoreapp3.1\Minesweeper.Core.AssemblyInfoInputs.cache
+C:\Users\Gurpreet Singh\source\repos\Minesweeper\Minesweeper\Minesweeper.Core\obj\Release\netcoreapp3.1\Minesweeper.Core.AssemblyInfo.cs
+C:\Users\Gurpreet Singh\source\repos\Minesweeper\Minesweeper\Minesweeper.Core\obj\Release\netcoreapp3.1\Minesweeper.Core.csproj.CoreCompileInputs.cache
+C:\Users\Gurpreet Singh\source\repos\Minesweeper\Minesweeper\Minesweeper.Core\obj\Release\netcoreapp3.1\Minesweeper.Core.dll
+C:\Users\Gurpreet Singh\source\repos\Minesweeper\Minesweeper\Minesweeper.Core\obj\Release\netcoreapp3.1\Minesweeper.Core.pdb

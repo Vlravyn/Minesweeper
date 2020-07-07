@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "KM2er2a1jp87crfP++jxPBRetvd0Opb4sIl1fGvmPyONTK5X8ZlrPVzLFHpiz6tsAouFhbGDJq/cf3WuMNQRng==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Gurpreet Singh\\source\\repos\\Minesweeper\\Minesweeper\\Minesweeper.Core\\Minesweeper.Core.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Gurpreet Singh\\.nuget\\packages\\commonservicelocator\\2.0.4\\commonservicelocator.2.0.4.nupkg.sha512",
+    "C:\\Users\\Gurpreet Singh\\.nuget\\packages\\prism.core\\7.2.0.1422\\prism.core.7.2.0.1422.nupkg.sha512",
+    "C:\\Users\\Gurpreet Singh\\.nuget\\packages\\prism.wpf\\7.2.0.1422\\prism.wpf.7.2.0.1422.nupkg.sha512"
+  ],
+  "logs": []
+}

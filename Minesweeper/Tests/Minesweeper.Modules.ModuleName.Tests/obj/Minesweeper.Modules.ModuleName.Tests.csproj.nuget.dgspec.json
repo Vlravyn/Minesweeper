@@ -1,0 +1,294 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Gurpreet Singh\\source\\repos\\Minesweeper\\Minesweeper\\Tests\\Minesweeper.Modules.ModuleName.Tests\\Minesweeper.Modules.ModuleName.Tests.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Gurpreet Singh\\source\\repos\\Minesweeper\\Minesweeper\\Minesweeper.Core\\Minesweeper.Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Gurpreet Singh\\source\\repos\\Minesweeper\\Minesweeper\\Minesweeper.Core\\Minesweeper.Core.csproj",
+        "projectName": "Minesweeper.Core",
+        "projectPath": "C:\\Users\\Gurpreet Singh\\source\\repos\\Minesweeper\\Minesweeper\\Minesweeper.Core\\Minesweeper.Core.csproj",
+        "packagesPath": "C:\\Users\\Gurpreet Singh\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Gurpreet Singh\\source\\repos\\Minesweeper\\Minesweeper\\Minesweeper.Core\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Gurpreet Singh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Prism.Core": {
+              "target": "Package",
+              "version": "[7.2.0.1422, )"
+            },
+            "Prism.Wpf": {
+              "target": "Package",
+              "version": "[7.2.0.1422, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WPF": {
+              "privateAssets": "none"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Gurpreet Singh\\source\\repos\\Minesweeper\\Minesweeper\\Modules\\Minesweeper.Modules.ModuleName\\Minesweeper.Modules.ModuleName.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Gurpreet Singh\\source\\repos\\Minesweeper\\Minesweeper\\Modules\\Minesweeper.Modules.ModuleName\\Minesweeper.Modules.ModuleName.csproj",
+        "projectName": "Minesweeper.Modules.ModuleName",
+        "projectPath": "C:\\Users\\Gurpreet Singh\\source\\repos\\Minesweeper\\Minesweeper\\Modules\\Minesweeper.Modules.ModuleName\\Minesweeper.Modules.ModuleName.csproj",
+        "packagesPath": "C:\\Users\\Gurpreet Singh\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Gurpreet Singh\\source\\repos\\Minesweeper\\Minesweeper\\Modules\\Minesweeper.Modules.ModuleName\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Gurpreet Singh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "C:\\Users\\Gurpreet Singh\\source\\repos\\Minesweeper\\Minesweeper\\Minesweeper.Core\\Minesweeper.Core.csproj": {
+                "projectPath": "C:\\Users\\Gurpreet Singh\\source\\repos\\Minesweeper\\Minesweeper\\Minesweeper.Core\\Minesweeper.Core.csproj"
+              },
+              "C:\\Users\\Gurpreet Singh\\source\\repos\\Minesweeper\\Minesweeper\\Services\\Minesweeper.Services.Interfaces\\Minesweeper.Services.Interfaces.csproj": {
+                "projectPath": "C:\\Users\\Gurpreet Singh\\source\\repos\\Minesweeper\\Minesweeper\\Services\\Minesweeper.Services.Interfaces\\Minesweeper.Services.Interfaces.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Prism.Wpf": {
+              "target": "Package",
+              "version": "[7.2.0.1422, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WPF": {
+              "privateAssets": "none"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Gurpreet Singh\\source\\repos\\Minesweeper\\Minesweeper\\Services\\Minesweeper.Services.Interfaces\\Minesweeper.Services.Interfaces.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Gurpreet Singh\\source\\repos\\Minesweeper\\Minesweeper\\Services\\Minesweeper.Services.Interfaces\\Minesweeper.Services.Interfaces.csproj",
+        "projectName": "Minesweeper.Services.Interfaces",
+        "projectPath": "C:\\Users\\Gurpreet Singh\\source\\repos\\Minesweeper\\Minesweeper\\Services\\Minesweeper.Services.Interfaces\\Minesweeper.Services.Interfaces.csproj",
+        "packagesPath": "C:\\Users\\Gurpreet Singh\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Gurpreet Singh\\source\\repos\\Minesweeper\\Minesweeper\\Services\\Minesweeper.Services.Interfaces\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Gurpreet Singh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netstandard2.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netstandard2.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netstandard2.1": {
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "NETStandard.Library": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Gurpreet Singh\\source\\repos\\Minesweeper\\Minesweeper\\Tests\\Minesweeper.Modules.ModuleName.Tests\\Minesweeper.Modules.ModuleName.Tests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Gurpreet Singh\\source\\repos\\Minesweeper\\Minesweeper\\Tests\\Minesweeper.Modules.ModuleName.Tests\\Minesweeper.Modules.ModuleName.Tests.csproj",
+        "projectName": "Minesweeper.Modules.ModuleName.Tests",
+        "projectPath": "C:\\Users\\Gurpreet Singh\\source\\repos\\Minesweeper\\Minesweeper\\Tests\\Minesweeper.Modules.ModuleName.Tests\\Minesweeper.Modules.ModuleName.Tests.csproj",
+        "packagesPath": "C:\\Users\\Gurpreet Singh\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Gurpreet Singh\\source\\repos\\Minesweeper\\Minesweeper\\Tests\\Minesweeper.Modules.ModuleName.Tests\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Gurpreet Singh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {
+              "C:\\Users\\Gurpreet Singh\\source\\repos\\Minesweeper\\Minesweeper\\Modules\\Minesweeper.Modules.ModuleName\\Minesweeper.Modules.ModuleName.csproj": {
+                "projectPath": "C:\\Users\\Gurpreet Singh\\source\\repos\\Minesweeper\\Minesweeper\\Modules\\Minesweeper.Modules.ModuleName\\Minesweeper.Modules.ModuleName.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[16.6.1, )"
+            },
+            "Moq": {
+              "target": "Package",
+              "version": "[4.14.0, )"
+            },
+            "coverlet.collector": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.2.1, )"
+            },
+            "xunit": {
+              "target": "Package",
+              "version": "[2.4.1, )"
+            },
+            "xunit.runner.visualstudio": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.4.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            },
+            "Microsoft.WindowsDesktop.App.WPF": {
+              "privateAssets": "none"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
