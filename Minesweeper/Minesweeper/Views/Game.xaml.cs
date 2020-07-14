@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.IO;
+using System.Media;
+using System.Windows;
 
 namespace Minesweeper
 {
@@ -11,5 +14,6 @@ namespace Minesweeper
         {
             InitializeComponent();
         }
+
     }
 }

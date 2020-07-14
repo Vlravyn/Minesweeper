@@ -9,7 +9,7 @@ namespace Minesweeper.Core
 
         private TileState state;
         private int content;
-        private string imageName;
+        private ImageType imageName;
         private TileType type;
 
         #endregion
@@ -43,13 +43,13 @@ namespace Minesweeper.Core
                 SetProperty(ref state, value);
 
                 if (state == TileState.Flagged)
-                    ImageName = "flag.png";
+                    ImageName = ImageType.Flag;
                 else if (state == TileState.QuestionMarked)
-                    ImageName = "questionMark.png";
+                    ImageName = ImageType.QuestionMark;
                 else if (State == TileState.Covered)
                 {
                     //Remove the image if the tile state becomes covered
-                    ImageName = "";
+                    ImageName = ImageType.None;
                 }
             }
         }
@@ -92,7 +92,7 @@ namespace Minesweeper.Core
         /// Stores the image that the tile has to show
         /// Is null if there is no image to show, in case of Covered or Uncovered <see cref="TileState"/>
         /// </summary>
-        public string ImageName
+        public ImageType ImageName
         {
             get
             {
@@ -188,7 +188,7 @@ namespace Minesweeper.Core
         {
             if (State == TileState.Uncovered)
             {
-                ImageName = string.Empty;
+                ImageName = ImageType.None;
 
                 if (Type == TileType.Number)
                 {
@@ -203,7 +203,7 @@ namespace Minesweeper.Core
                 }
                 else if (Type == TileType.Bomb)
                 {
-                    ImageName = "mine.png";
+                    ImageName = ImageType.Mine;
                 }
 
                 //Since the IsEnabled Property is Dependant on the State, we call property changed event every time state changes

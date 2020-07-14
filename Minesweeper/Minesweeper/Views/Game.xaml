@@ -3,22 +3,24 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Minesweeper" 
+        xmlns:local="clr-namespace:Minesweeper"
+        xmlns:core="clr-namespace:Minesweeper.Core;assembly=Minesweeper.Core"
         xmlns:prism="http://prismlibrary.com/"
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
-        xmlns:core="clr-namespace:Minesweeper.Core;assembly=Minesweeper.Core"
         mc:Ignorable="d"
         prism:ViewModelLocator.AutoWireViewModel="True"
         SizeToContent="WidthAndHeight"
-        Title="Game"
+        Title="Minesweeper"
         Height="450"
         Width="800">
     <i:Interaction.Behaviors>
         <local:CloseWindowBehavior CloseTrigger="{Binding CloseTrigger}"/>
     </i:Interaction.Behaviors>
+
     <Grid>
         <StackPanel Orientation="Vertical">
 
+            <!-- Menu -->
             <Menu>
                 <MenuItem Header="Game">
                     <MenuItem Header="New Game" Command="{Binding RestartGameCommand}"/>
@@ -30,9 +32,10 @@
                     <MenuItem Header="Exit" Command="{Binding ExitGameCommand}"/>
                 </MenuItem>
             </Menu>
+            
             <!--Restart Button-->
             <Button
-                Margin="10"
+                Margin="2"
                 HorizontalAlignment="Center"
                 Content="Restart" 
                 Command="{Binding RestartGameCommand}"/>
@@ -88,7 +91,7 @@
                                     <Image>
                                         <Image.Resources>
                                             <Style TargetType="Image">
-                                                <Setter  Property="Source" Value="{Binding ImageName, Converter={x:Static local:StringToImageConverter.Instance}}"/>
+                                                <Setter  Property="Source" Value="{Binding ImageName, Converter={local:EnumToImageConverter}}"/>
                                                 <Style.Triggers>
                                                     <MultiDataTrigger>
                                                         <MultiDataTrigger.Conditions>
@@ -96,7 +99,7 @@
                                                             <Condition Binding="{Binding Type}" Value="{x:Static core:TileType.Bomb}"/>
                                                         </MultiDataTrigger.Conditions>
                                                         <MultiDataTrigger.Setters>
-                                                            <Setter Property="Source" Value="pack://application:,,,/Resources/Images/mine.png"/>
+                                                            <Setter Property="Source" Value="pack://application:,,,/Minesweeper.Core;component/Resources/Images/mine.png"/>
                                                         </MultiDataTrigger.Setters>
                                                     </MultiDataTrigger>
                                                 </Style.Triggers>
@@ -143,14 +146,15 @@
                         <Setter Property="VerticalAlignment" Value="Center"/>
                     </Style>
                 </Grid.Resources>
+                
                 <UniformGrid Columns="2" Grid.Column="0" HorizontalAlignment="Center">
-                    <Image Source="pack://application:,,,/Resources/Images/timer.png" Height="50" Width="50"/>
+                    <Image Source="pack://application:,,,/Minesweeper.Core;component/Resources/Images/timer.png" Height="50" Width="50"/>
                     <TextBlock Text="{Binding CurrentTime}"/>
                 </UniformGrid>
 
                 <UniformGrid Columns="2" Grid.Column="1" HorizontalAlignment="Center">
                     <TextBlock Text="{Binding RemainingMines}"/>
-                    <Image Source="pack://application:,,,/Resources/Images/mine.png" Height="50" Width="50"/>
+                    <Image Source="pack://application:,,,/Minesweeper.Core;component/Resources/Images/mine.png" Height="50" Width="50"/>
                 </UniformGrid>
             </Grid>
         </StackPanel>

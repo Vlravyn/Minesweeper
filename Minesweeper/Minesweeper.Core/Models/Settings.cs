@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Minesweeper.Core
 {
@@ -16,17 +18,16 @@ namespace Minesweeper.Core
         private static DifficultyLevel difficulty;
 
         /// <summary>
-        /// Stores the folder location of the local appdata
+        /// Stores the folder location of the local app data
         /// </summary>
-        private static string FolderLocation = $"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}/Minesweeper";
+        private static readonly string FolderLocation = $"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}/Minesweeper";
 
         /// <summary>
         /// stores the location of the settings file
         /// </summary>
-        private static string FileLocation = $"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}/Minesweeper/Settings.ini";
+        private static readonly string FileLocation = $"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}/Minesweeper/Settings.ini";
 
         #endregion
-
 
         #region Public Properties
 
@@ -63,10 +64,17 @@ namespace Minesweeper.Core
         public static DifficultyLevel Difficulty
         {
             get { return difficulty; }
-            private set { difficulty = value; }
+            private set 
+            { 
+                difficulty = value; 
+            }
         }
 
         #endregion
+
+
+        internal static List<DifficultyData> AllDifficulties { get; private set; } = new List<DifficultyData>();
+
 
         /// <summary>
         /// Loads the Settings from the file
@@ -76,14 +84,11 @@ namespace Minesweeper.Core
             if(!Directory.Exists(FolderLocation))
             {
                 Directory.CreateDirectory(FolderLocation);
-                File.Create(FileLocation);
             }
 
             if (!File.Exists(FileLocation))
             {
                 //If the settings.ini does not exist at application start, create it and put default values for all the settings
-                File.Create(FileLocation);
-
                 DisplayAnimations = true;
                 PlaySounds = true;
                 SaveOnExit = false;
@@ -92,7 +97,7 @@ namespace Minesweeper.Core
                 AllowQuestionMark = true;
                 Difficulty = DifficultyLevel.Beginner;
 
-                StreamWriter sw = new StreamWriter(File.Open(FileLocation, FileMode.Open, FileAccess.Write));
+                StreamWriter sw = new StreamWriter(File.Open(FileLocation, FileMode.OpenOrCreate, FileAccess.Write));
                 sw.WriteLine($"{nameof(DisplayAnimations)} = {DisplayAnimations}");
                 sw.WriteLine($"{nameof(PlaySounds)} = {PlaySounds}");
                 sw.WriteLine($"{nameof(SaveOnExit)} = {SaveOnExit}");
@@ -102,10 +107,11 @@ namespace Minesweeper.Core
                 sw.WriteLine($"{nameof(Difficulty)} = {Difficulty}");
                 sw.Dispose();
 
+                InitializeDifficulties();
                 return;
             }
 
-            StreamReader sr = new StreamReader(File.Open(FileLocation, FileMode.Open, FileAccess.Write));
+            StreamReader sr = new StreamReader(File.Open(FileLocation, FileMode.Open, FileAccess.Read));
 
             //Reading the settings from the file and storing them
             while(!sr.EndOfStream)
@@ -135,20 +141,107 @@ namespace Minesweeper.Core
                         AllowQuestionMark = Convert.ToBoolean(value);
                         break;
                     case "Difficulty":
-                        if (nameof(DifficultyLevel.Beginner) == value)
-                            Difficulty = DifficultyLevel.Beginner; 
-                        else if (nameof(DifficultyLevel.Intermediate) == value)
+                        value = value.Substring(1, value.Length - 1);
+                        if (string.Equals(value, DifficultyLevel.Beginner.ToString()))
+                        {
+                            Difficulty = DifficultyLevel.Beginner;
+                        }
+                        else if (string.Equals(value, DifficultyLevel.Intermediate.ToString()))
+                        {
                             Difficulty = DifficultyLevel.Intermediate;
-                        else if (nameof(DifficultyLevel.Advanced) == value)
+                        }
+                        else if (string.Equals(value, DifficultyLevel.Advanced.ToString()))
+                        {
                             Difficulty = DifficultyLevel.Advanced;
-                        else if (nameof(DifficultyLevel.Custom) == value)
+                        }
+                        else if (string.Equals(value, DifficultyLevel.Custom.ToString()))
+                        {
                             Difficulty = DifficultyLevel.Custom;
+                        }
+                        break;
+                }
+                
+            }
+
+            sr.Dispose();
+            InitializeDifficulties();
+        }
+
+        /// <summary>
+        /// populates the <see cref="AllDifficulties"/>
+        /// </summary>
+        private static void InitializeDifficulties()
+        {
+            AllDifficulties.Add(new DifficultyData()
+            {
+                Rows = 9,
+                Columns = 9,
+                TotalMines = 10,
+                Level = DifficultyLevel.Beginner
+            }); 
+            AllDifficulties.Add(new DifficultyData()
+            {
+                Rows = 16,
+                Columns = 16,
+                TotalMines = 40,
+                Level = DifficultyLevel.Intermediate
+            }); 
+            AllDifficulties.Add(new DifficultyData()
+            {
+                Rows = 16,
+                Columns = 30,
+                TotalMines = 99,
+                Level = DifficultyLevel.Advanced
+            });
+
+            var customFileLocation = $"{FolderLocation}/CustomSettings.ini";
+
+            if(!File.Exists(customFileLocation))
+            {
+                StreamWriter sw = new StreamWriter(File.Open(customFileLocation, FileMode.OpenOrCreate, FileAccess.Write));
+                sw.WriteLine($"Rows = 9");
+                sw.WriteLine($"Columns = 9");
+                sw.WriteLine($"TotalMines = 10");
+                sw.Dispose();
+            }
+
+            StreamReader sr = new StreamReader(File.Open(customFileLocation, FileMode.Open, FileAccess.Read));
+            int row = 0, column = 0, totalMines = 0;
+
+            while(!sr.EndOfStream)
+            {
+                var line = sr.ReadLine();
+                var name = line.Substring(0, line.IndexOf(' '));
+                var answer = line[line.LastIndexOf(' ')..];
+
+                switch(name)
+                {
+                    case "Rows":
+                        row = Convert.ToInt32(answer);
+                        break;
+                    case "Columns":
+                        column = Convert.ToInt32(answer);
+                        break;
+                    case "TotalMines":
+                        totalMines = Convert.ToInt32(answer);
                         break;
                 }
             }
 
-            sr.Dispose();
+            AllDifficulties.Add(new DifficultyData()
+            {
+                Rows = row,
+                Columns = column,
+                TotalMines = totalMines,
+                Level = DifficultyLevel.Custom
+            });
+
+            var index = AllDifficulties.IndexOf(AllDifficulties.Where(dif => dif.Level == Difficulty).ToList()[0]);
+
+            AllDifficulties[index].IsSelectedDifficilty = true;
+
         }
+
 
         /// <summary>
         /// Saves the current settings into the file
@@ -173,14 +266,20 @@ namespace Minesweeper.Core
             {
                 File.Create(FileLocation);
             }
+            else
+            {
+                File.Delete(FileLocation);
+            }
 
-            StreamWriter sw = new StreamWriter(File.Open(FileLocation, FileMode.Open, FileAccess.Write));
+
+            StreamWriter sw = new StreamWriter(File.Open(FileLocation, FileMode.OpenOrCreate, FileAccess.Write));
             sw.WriteLine($"{nameof(DisplayAnimations)} = {DisplayAnimations}");
             sw.WriteLine($"{nameof(PlaySounds)} = {PlaySounds}");
             sw.WriteLine($"{nameof(SaveOnExit)} = {SaveOnExit}");
             sw.WriteLine($"{nameof(ContinueSavedGames)} = {ContinueSavedGames}");
             sw.WriteLine($"{nameof(ShowTips)} = {ShowTips}");
             sw.WriteLine($"{nameof(AllowQuestionMark)} = {AllowQuestionMark}");
+            sw.WriteLine($"{nameof(Difficulty)} = {Difficulty}");
             sw.Dispose();
         }
     }

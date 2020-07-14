@@ -3,9 +3,47 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
     <AssemblyName>Minesweeper.Core</AssemblyName>
+    <Platforms>AnyCPU;x86;x64</Platforms>
   </PropertyGroup>
+  <ItemGroup>
+    <None Remove="Resources\Images\flag.png" />
+    <None Remove="Resources\Images\mine.png" />
+    <None Remove="Resources\Images\questionMark.png" />
+    <None Remove="Resources\Images\timer.png" />
+    <None Remove="Resources\Sounds\GameStart.wav" />
+    <None Remove="Resources\Sounds\Lose.wav" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Prism.Core" Version="7.2.0.1422" />
     <PackageReference Include="Prism.Wpf" Version="7.2.0.1422" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\flag.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\mine.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\questionMark.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Images\timer.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Resources\Sounds\GameStart.wav" />
+    <Resource Include="Resources\Sounds\Lose.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>

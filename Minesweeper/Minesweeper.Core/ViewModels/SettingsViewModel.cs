@@ -1,6 +1,9 @@
-﻿using Prism.Mvvm;
+﻿using Prism.Commands;
+using Prism.Mvvm;
 using Prism.Services.Dialogs;
 using System;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace Minesweeper.Core
 {
@@ -18,6 +21,8 @@ namespace Minesweeper.Core
         #endregion
 
         #region Public Properties
+
+        public ObservableCollection<DifficultyData> AllDifficulties { get; set; } = new ObservableCollection<DifficultyData>();
 
         /// <summary>
         /// Stores if the animation should be displayed
@@ -77,12 +82,45 @@ namespace Minesweeper.Core
 
         #endregion
 
+        #region Public DelegateCommands
+
+        public DelegateCommand OKCommand => new DelegateCommand(SaveSettings);
+
+        public DelegateCommand CancelCommand => new DelegateCommand(CloseDialogWithoutSave);
+
+        #endregion
+
         #region Public Events
 
+        /// <summary>
+        /// Requests to close the dialog
+        /// </summary>
         public event Action<IDialogResult> RequestClose;
 
         #endregion
 
+        #region Constructor
+
+        /// <summary>
+        /// Default Constructor
+        /// </summary>
+        public SettingsViewModel()
+        {
+            foreach(var difficulty in Settings.AllDifficulties)
+            {
+                this.AllDifficulties.Add(difficulty);
+            }
+
+            DisplayAnimations = Settings.DisplayAnimations;
+            PlaySounds = Settings.PlaySounds;
+            SaveOnExit = Settings.SaveOnExit;
+            ContinueSavedGames = Settings.ContinueSavedGames;
+            ShowTips = Settings.ShowTips;
+            AllowQuestionMarks = Settings.AllowQuestionMark;
+        }
+
+        #endregion
+        
         #region Dialog Methods
 
         public bool CanCloseDialog()
@@ -100,5 +138,22 @@ namespace Minesweeper.Core
 
         #endregion
 
+        /// <summary>
+        /// Closes the dialog without making any changes to the settings
+        /// </summary>
+        private void CloseDialogWithoutSave()
+        {
+            RequestClose.Invoke(new DialogResult(ButtonResult.Cancel));
+        }
+
+        /// <summary>
+        /// Saves the settings
+        /// </summary>
+        private void SaveSettings()
+        {
+            Settings.SaveSettings(DisplayAnimations, PlaySounds, SaveOnExit, ContinueSavedGames, ShowTips, AllowQuestionMarks, AllDifficulties.Where(diff=> diff.IsSelectedDifficilty == true).ToList()[0].Level);
+
+            RequestClose.Invoke(new DialogResult(ButtonResult.OK));
+        }
     }
 }

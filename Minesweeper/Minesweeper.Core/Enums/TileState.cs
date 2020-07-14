@@ -1,5 +1,8 @@
 ﻿namespace Minesweeper.Core
 {
+    /// <summary>
+    /// Represents the state of the tile
+    /// </summary>
     public enum TileState
     {
         /// <summary>
@@ -22,4 +25,5 @@
         /// </summary>
         Uncovered
     }
+
 }

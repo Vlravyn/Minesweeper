@@ -5,6 +5,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Media;
 using System.Windows.Threading;
 
 namespace Minesweeper.Core
@@ -141,7 +142,6 @@ namespace Minesweeper.Core
         {
             Service.ShowDialog("Statistics", new DialogParameters(), callback => { });
         });
-
         #endregion
 
         #region Constructor
@@ -151,13 +151,24 @@ namespace Minesweeper.Core
         /// </summary>
         public GameViewModel(IDialogService _service)
         {
+            //Playing gamestart sound
+            new SoundPlayer(Properties.Resources.GameStart).Play();
+
+            //DialogService for opening dialogs for various purposes
             Service = _service;
+
+            //Loading the settings
+            Settings.LoadSettings();
+
+            //Initializing the game
             Progress = GameProgress.NewGame;
             AllTiles = new ObservableCollection<Tile>();
-            Rows = 9;
-            Columns = 9;
-            TotalMines = 10;
+            Rows = Settings.AllDifficulties.Where(diff => diff.Level == Settings.Difficulty).ToList()[0].Rows;
+            Columns = Settings.AllDifficulties.Where(diff => diff.Level == Settings.Difficulty).ToList()[0].Columns;
+            TotalMines = Settings.AllDifficulties.Where(diff => diff.Level == Settings.Difficulty).ToList()[0].TotalMines;
             RemainingMines = TotalMines;
+
+            //Initliazing stopwatch for the game
             CurrentTime = "0";
             dispatcherTimer.Tick += UpdateTimer;
             dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 1);
@@ -174,27 +185,29 @@ namespace Minesweeper.Core
         /// <param name="tile">the tile to open</param>
         private void OpenTile(Tile tile)
         {
+            //Since we cannot open any tile which is flagged or question marked or uncovered, we just don't do anything and return
+            if (tile.State != TileState.Covered)
+                return;
+
+            tile.State = TileState.Uncovered;
+
             //If it is a new game, set up the board and all it's tiles
             if (Progress == GameProgress.NewGame)
             {
                 PlaceMines(tile);
             }
 
-            //Since we cannot open any tile which is flagged or question marked or uncovered, we just don't do anything and return
-            if (tile.State != TileState.Covered)
-                return;
-
             //Show the dialog that the player lost since s/he clicked on a mine
             if (tile.Type == TileType.Bomb)
             {
+                Progress = GameProgress.GameEnd;
                 bool isWin = false;
                 dispatcherTimer.Stop();
                 stopwatch.Stop();
+                new SoundPlayer(Properties.Resources.Lose).Play();
                 Service.ShowDialog("GameEnd", new DialogParameters($"isWin={isWin}"), result => GameEndCallback(result));
                 return;
             }
-
-            tile.State = TileState.Uncovered;
 
             //If the tile has a number in it, do not open any adjacent tiles
             if (tile.Type == TileType.Number)
@@ -234,11 +247,30 @@ namespace Minesweeper.Core
             }
             else if (tile.State == TileState.Flagged)
             {
-                AllTiles[index].State = TileState.QuestionMarked;
+                if(Settings.AllowQuestionMark)
+                {
+                    AllTiles[index].State = TileState.QuestionMarked;
+                }
+                else
+                {
+                    AllTiles[index].State = TileState.Covered;
+                }
                 ++RemainingMines;
             }
             else if (tile.State == TileState.QuestionMarked)
                 AllTiles[index].State = TileState.Covered;
+        }
+
+        /// <summary>
+        /// Restarts the game
+        /// </summary>
+        private void RestartGame()
+        {
+            RemainingMines = TotalMines;
+            CurrentTime = "0";
+            Progress = GameProgress.NewGame;
+            InitlializeTiles();
+            stopwatch = new Stopwatch();
         }
 
         /// <summary>
@@ -275,6 +307,14 @@ namespace Minesweeper.Core
         /// <param name="callback"></param>
         private void SettingsCallback(IDialogResult callback)
         {
+            if (callback.Result == ButtonResult.OK)
+            {
+                Rows = Settings.AllDifficulties.Where(diff => diff.Level == Settings.Difficulty).ToList()[0].Rows;
+                Columns = Settings.AllDifficulties.Where(diff => diff.Level == Settings.Difficulty).ToList()[0].Columns;
+                TotalMines = Settings.AllDifficulties.Where(diff => diff.Level == Settings.Difficulty).ToList()[0].TotalMines;
+                RemainingMines = TotalMines;
+                InitlializeTiles();
+            }
         }
 
         #endregion
@@ -286,6 +326,7 @@ namespace Minesweeper.Core
         /// </summary>
         private void InitlializeTiles()
         {
+            AllTiles.Clear();
             for (int i = 0; i < Rows; i++)
             {
                 for (int j = 0; j < Columns; j++)
@@ -314,11 +355,11 @@ namespace Minesweeper.Core
 
             while (placedMines != TotalMines)
             {
-                int xRow = rand.Next(0, Rows - 1);
-                int xCol = rand.Next(0, Columns - 1);
+                int xRow = rand.Next(0, Rows-1);
+                int xCol = rand.Next(0, Columns-1);
                 foreach (var t in AllTiles.Where(singleTile => singleTile.Row == xRow && singleTile.Column == xCol))
                 {
-                    if (t != tile)
+                    if (t != tile && t.Type != TileType.Bomb)
                     {
                         AllTiles[AllTiles.IndexOf(t)].Type = TileType.Bomb;
                         placedMines++;
@@ -338,20 +379,6 @@ namespace Minesweeper.Core
         }
 
         /// <summary>
-        /// Restarts the game
-        /// </summary>
-        private void RestartGame()
-        {
-            Service.Show("TestView",new DialogParameters(), hi => { });
-            AllTiles.Clear();
-            RemainingMines = TotalMines;
-            CurrentTime = "0";
-            Progress = GameProgress.NewGame;
-            InitlializeTiles();
-            stopwatch = new Stopwatch();
-        }
-
-        /// <summary>
         /// Updates the CurrentTime every second
         /// </summary>
         /// <param name="sender"></param>
@@ -361,7 +388,7 @@ namespace Minesweeper.Core
             if (stopwatch.IsRunning)
             {
                 TimeSpan ts = stopwatch.Elapsed;
-                CurrentTime = ts.Seconds.ToString();
+                CurrentTime = Math.Floor(ts.TotalSeconds).ToString();
             }
         }
 

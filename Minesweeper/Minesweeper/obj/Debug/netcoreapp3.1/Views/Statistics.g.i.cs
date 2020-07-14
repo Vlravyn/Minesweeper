@@ -60,7 +60,7 @@ namespace Minesweeper {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/Minesweeper;V1.0.0.0;component/views/statistics.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/Minesweeper;component/views/statistics.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\Views\Statistics.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
