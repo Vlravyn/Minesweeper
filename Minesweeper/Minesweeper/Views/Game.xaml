@@ -16,6 +16,11 @@
     <i:Interaction.Behaviors>
         <local:CloseWindowBehavior CloseTrigger="{Binding CloseTrigger}"/>
     </i:Interaction.Behaviors>
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Closing">
+            <i:InvokeCommandAction Command="{Binding ExitGameCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
 
     <Grid>
         <StackPanel Orientation="Vertical">

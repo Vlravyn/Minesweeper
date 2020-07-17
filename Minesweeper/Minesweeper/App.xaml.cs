@@ -32,6 +32,7 @@ namespace Minesweeper
             containerRegistry.RegisterDialog<GameEnd, GameEndViewModel>("GameEnd");
             containerRegistry.RegisterDialog<Settings, SettingsViewModel>("Settings");
             containerRegistry.RegisterDialog<Statistics, StatisticsViewModel>("Statistics");
+            containerRegistry.RegisterDialog<SaveGame, SaveGameViewModel>("AskSave");
         }
 
         /// <summary>

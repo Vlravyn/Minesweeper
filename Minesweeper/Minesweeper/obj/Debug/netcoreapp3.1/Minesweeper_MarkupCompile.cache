@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NETCOREAPP;NETCOREAPP3_1
 C:\Users\Gurpreet Singh\source\repos\Minesweeper\Minesweeper\Minesweeper\App.xaml
-4-147729698
+5-1624407420
 
-101387970076
+11407754958
 210-2027304300
-Views\Game.xaml;Views\GameEnd.xaml;Views\Settings.xaml;Views\Statistics.xaml;
+Views\Game.xaml;Views\GameEnd.xaml;Views\SaveGame.xaml;Views\Settings.xaml;Views\Statistics.xaml;
 
 False
 

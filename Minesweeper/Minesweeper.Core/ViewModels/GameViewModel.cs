@@ -4,8 +4,11 @@ using Prism.Services.Dialogs;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Media;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Windows.Threading;
 
 namespace Minesweeper.Core
@@ -38,6 +41,7 @@ namespace Minesweeper.Core
         /// </summary>
         private Stopwatch stopwatch = new Stopwatch();
 
+        private static readonly string saveFileLocation = $"{Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData)}//Minesweeper//SavedGame.txt";
         #endregion
 
         #region Public Properties
@@ -160,19 +164,42 @@ namespace Minesweeper.Core
             //Loading the settings
             Settings.LoadSettings();
 
-            //Initializing the game
-            Progress = GameProgress.NewGame;
+
             AllTiles = new ObservableCollection<Tile>();
-            Rows = Settings.AllDifficulties.Where(diff => diff.Level == Settings.Difficulty).ToList()[0].Rows;
-            Columns = Settings.AllDifficulties.Where(diff => diff.Level == Settings.Difficulty).ToList()[0].Columns;
-            TotalMines = Settings.AllDifficulties.Where(diff => diff.Level == Settings.Difficulty).ToList()[0].TotalMines;
-            RemainingMines = TotalMines;
+            if (Settings.ContinueSavedGames && File.Exists(saveFileLocation))
+            {
+                IFormatter formatter = new BinaryFormatter();
+                Stream stream = new FileStream(saveFileLocation, FileMode.Open, FileAccess.Read);
+
+                var oldGame = (GameViewModel)formatter.Deserialize(stream);
+
+                Progress = oldGame.Progress;
+                AllTiles = oldGame.AllTiles;
+                Rows = oldGame.Rows;
+                Columns = oldGame.Columns;
+                TotalMines = oldGame.TotalMines;
+                RemainingMines = AllTiles.Where(tile => tile.State == TileState.Flagged).ToList().Count;
+                stopwatch = oldGame.stopwatch;
+
+                stream.Close();
+            }
+            else
+            {
+                //Initializing the game
+                Progress = GameProgress.NewGame;
+                Rows = Settings.AllDifficulties.Where(diff => diff.Level == Settings.Difficulty).ToList()[0].Rows;
+                Columns = Settings.AllDifficulties.Where(diff => diff.Level == Settings.Difficulty).ToList()[0].Columns;
+                TotalMines = Settings.AllDifficulties.Where(diff => diff.Level == Settings.Difficulty).ToList()[0].TotalMines;
+                RemainingMines = TotalMines;
+                InitlializeTiles();
+
+                CurrentTime = "0";
+
+            }
 
             //Initliazing stopwatch for the game
-            CurrentTime = "0";
             dispatcherTimer.Tick += UpdateTimer;
             dispatcherTimer.Interval = new TimeSpan(0, 0, 0, 0, 1);
-            InitlializeTiles();
         }
 
         #endregion
@@ -278,7 +305,7 @@ namespace Minesweeper.Core
         /// </summary>
         private void ExitGame()
         {
-            CloseTrigger = true;
+            Service.ShowDialog("AskSave", new DialogParameters(), callback => AskSaveGameCallback(callback));
         }
 
         #endregion
@@ -314,6 +341,31 @@ namespace Minesweeper.Core
                 TotalMines = Settings.AllDifficulties.Where(diff => diff.Level == Settings.Difficulty).ToList()[0].TotalMines;
                 RemainingMines = TotalMines;
                 InitlializeTiles();
+            }
+        }
+
+        private void AskSaveGameCallback(IDialogResult callback)
+        {
+            switch (callback.Result)
+            {
+                case ButtonResult.Yes:
+                    //Saving the current state of the game
+                    IFormatter formatter = new BinaryFormatter();
+                    Stream stream = new FileStream(saveFileLocation, FileMode.Create, FileAccess.Write);
+                    formatter.Serialize(stream, this);
+
+                    stream.Close();
+
+                    CloseTrigger = true;
+                    break;
+                case ButtonResult.No:
+                    if (File.Exists(saveFileLocation))
+                    {
+                        File.Delete(saveFileLocation);
+                    }
+                    break;
+                case ButtonResult.Cancel:
+                    break;
             }
         }
 

@@ -61,3 +61,5 @@ C:\Users\Gurpreet Singh\source\repos\Minesweeper\Minesweeper\Minesweeper\obj\Deb
 C:\Users\Gurpreet Singh\source\repos\Minesweeper\Minesweeper\Minesweeper\obj\Debug\netcoreapp3.1\Minesweeper.csproj.CoreCompileInputs.cache
 C:\Users\Gurpreet Singh\source\repos\Minesweeper\Minesweeper\Minesweeper\obj\Debug\netcoreapp3.1\Minesweeper.csproj.CopyComplete
 C:\Users\Gurpreet Singh\source\repos\Minesweeper\Minesweeper\Minesweeper\obj\Debug\netcoreapp3.1\Minesweeper.genruntimeconfig.cache
+C:\Users\Gurpreet Singh\source\repos\Minesweeper\Minesweeper\Minesweeper\obj\Debug\netcoreapp3.1\Views\SaveGame.g.cs
+C:\Users\Gurpreet Singh\source\repos\Minesweeper\Minesweeper\Minesweeper\obj\Debug\netcoreapp3.1\Views\SaveGame.baml
